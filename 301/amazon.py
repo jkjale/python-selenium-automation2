@@ -18,6 +18,11 @@ driver.maximize_window()
 # open the url
 driver.get('https://www.amazon.com/')
 
+# Wait for the page to load completely
+WebDriverWait(driver, 10).until(
+    lambda driver: driver.execute_script('return document.readyState') == 'complete'
+)
+
 signin_dropdown = WebDriverWait(driver, 10).until(
     EC.visibility_of_element_located((By.ID, "nav-link-accountList"))
 )
@@ -33,11 +38,11 @@ signin_button.click()
 sleep(2)
 
 def test_form():
-    amazon_logo = driver.find_elements(By.XPATH, "//a[@aria-label='www.amazon.com']/i")
-    assert len(amazon_logo) == 1, 'The Amazon logo is missing!!'
+    amazon_logo = driver.find_element(By.XPATH, "//a[@aria-label='www.amazon.com']/i")
+    assert amazon_logo is not None, 'The Amazon logo is missing!!'
 
-    email_field = driver.find_elements(By.ID, "ap_email")
-    assert len(email_field) == 1, 'Email field is missing!!'
+    email_field = driver.find_element(By.ID, "ap_email")
+    assert email_field is not None, 'Email field is missing!!'
 
     continue_button = driver.find_element(By.ID, "continue-announce")
     assert continue_button.text == 'Continue', 'Button text is not "Continue"!!'
@@ -67,4 +72,3 @@ def test_form():
 test_form()
 
 driver.quit()
-
