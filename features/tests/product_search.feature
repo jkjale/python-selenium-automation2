@@ -5,3 +5,11 @@ Feature: Product Search functionality
     When Input tea into search field
     And Click on search icon
     Then Product results for tea are shown
+
+
+  Scenario: Searched products show name and image
+    Given Open Target.com
+    When Input tea into search field
+    And Click on search icon
+    Then Product results for tea are shown
+    And Each product's name and image are shown

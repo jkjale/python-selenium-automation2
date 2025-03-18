@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 TARGET_HELP_HEADER = (By.XPATH, "//*[contains(text(), 'Target Help')]")
@@ -18,8 +17,9 @@ def open_help_page(context):
 
 @then('"Target Help" header is shown')
 def verify_target_help_header(context):
-    target_help_header = WebDriverWait(context.driver, 10).until(
-        EC.visibility_of_element_located(TARGET_HELP_HEADER)
+    target_help_header = context.driver.wait.until(
+        EC.visibility_of_element_located(TARGET_HELP_HEADER),
+        message='"Target Help" header not shown'
     )
     assert target_help_header.text.strip().title() == 'Target Help', 'Header should be shown'
 
@@ -47,4 +47,4 @@ def verify_contactUsAndProductRecalls_links_are_shown(context):
 @then('"Browse all Help pages" header is shown')
 def verify_browseAllHelpPages_header(context):
     browse_all_header = context.driver.find_element(*BROWSE_ALL_HEADER)
-    assert browse_all_header.text.strip().lower() == 'browse all help pages', 'Header should be shown'
+    assert browse_all_header.text.strip().lower() == 'browse all help pages', 'Header not shown'

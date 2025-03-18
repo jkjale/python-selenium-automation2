@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from behave import given, when, then
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 CART_ITEM = (By.CSS_SELECTOR, "[data-test='cart-item-groups']")
@@ -10,8 +9,9 @@ SUBTOTAL = (By.CSS_SELECTOR, "[data-test='cart-summary-subTotal'] > div:nth-chil
 
 @then('Cart page is displayed with the added item and correct subtotal')
 def verify_cart_page(context):
-    items = WebDriverWait(context.driver, 10).until(
-        EC.visibility_of_all_elements_located(CART_ITEM)
+    items = context.driver.wait.until(
+        EC.visibility_of_all_elements_located(CART_ITEM),
+        message='Item list is empty'
     )
     assert len(items) == 1, 'Item not found in cart'
     first_item = items[0]
