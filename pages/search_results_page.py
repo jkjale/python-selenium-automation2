@@ -8,4 +8,6 @@ class SearchResultsPage(Page):
     def verify_search_results(self, search_word):
         results_category_name = self.find_element(self.RESULTS_CATEGORY_NAME)
         assert search_word.lower() in results_category_name.text.lower(), 'Results category name not found'
+
+    def verify_search_url(self, search_word):
         assert search_word.lower() in self.driver.current_url.lower(), f'Expected query not in {self.driver.current_url.lower()}'

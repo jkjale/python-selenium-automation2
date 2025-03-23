@@ -39,9 +39,14 @@ def click_on_viewCartAndCheckOut_button_in_navPanel(context):
     ).click()
 
 
-@then('Search results for {search_word} are shown')
+@then('Verify correct search results shown for {search_word}')
 def verify_search_results(context, search_word):
     context.app.search_results_page.verify_search_results(search_word)
+
+
+@then('Verify {search_word} in URL')
+def verify_search_url(context, search_word):
+    context.app.search_results_page.verify_search_url(search_word)
 
 
 @then('Right-side navigation panel with "Add to cart" button is shown')

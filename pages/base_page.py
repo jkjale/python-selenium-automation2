@@ -1,4 +1,4 @@
-# from utils.wait_utils import WaitUtils
+from utils.wait_utils import WaitUtils
 from selenium.webdriver.support import expected_conditions as EC
 
 
@@ -22,29 +22,29 @@ class Page:
     def input_text(self, text, locator):
         WaitUtils.wait_for_element_to_be_visible(self.driver.wait, locator).send_keys(text)
 
-    def wait_until_clickable(self, locator):
-        self.wait.until(
-            EC.element_to_be_clickable(locator),
-            message=f'Element not clickable by {locator}'
-        )
-
-    def wait_until_clickable_click(self, locator):
-        self.wait.until(
-            EC.element_to_be_clickable(locator),
-            message=f'Element not clickable by {locator}'
-        ).click()
-
-    def wait_until_visible(self, locator):
-        self.wait.until(
-            EC.visibility_of_element_located(locator),
-            message=f'Element not visible by {locator}'
-        )
-
-    def wait_until_invisible(self, locator):
-        self.wait.until(
-            EC.invisibility_of_element_located(locator),
-            message=f'Element still visible by {locator}'
-        )
+    # def wait_until_clickable(self, locator):
+    #     self.wait.until(
+    #         EC.element_to_be_clickable(locator),
+    #         message=f'Element not clickable by {locator}'
+    #     )
+    #
+    # def wait_until_clickable_click(self, locator):
+    #     self.wait.until(
+    #         EC.element_to_be_clickable(locator),
+    #         message=f'Element not clickable by {locator}'
+    #     ).click()
+    #
+    # def wait_until_visible(self, locator):
+    #     self.wait.until(
+    #         EC.visibility_of_element_located(locator),
+    #         message=f'Element not visible by {locator}'
+    #     )
+    #
+    # def wait_until_invisible(self, locator):
+    #     self.wait.until(
+    #         EC.invisibility_of_element_located(locator),
+    #         message=f'Element still visible by {locator}'
+    #     )
 
     def verify_text(self, expected_text, *locator):
         actual_text = self.find_element(*locator).text

@@ -3,7 +3,6 @@ Feature: Product Search functionality
   Scenario: User can search for a product
     Given Open Target.com
     When Search for tea
-#    Then Search results for tea are shown
     Then Verify correct search results shown for tea
     And Verify tea in URL
 
