@@ -3,4 +3,5 @@ from pages.base_page import Page
 
 class MainPage(Page):
     def open_main_page(self):
-        self.open_url('https://www.target.com/')
+        self.open_url(self.base_url)
+        self.wait_until_clickable()
