@@ -9,3 +9,7 @@ def open_target_site(context):
 @when('Search for {search_word}')
 def search_product(context, search_word):
     context.app.header.search(search_word)
+
+@when('Click on Cart icon')
+def click_cart_icon(context):
+    context.app.header.click_cart_icon()
