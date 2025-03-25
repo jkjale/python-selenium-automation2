@@ -8,8 +8,7 @@ PRODUCT_CARD = (By.CSS_SELECTOR, "[data-test='@web/site-top-of-funnel/ProductCar
 PRODUCT_IMAGE = (By.CSS_SELECTOR, "[data-test='@web/ProductCard/ProductCardImage/primary'] > img")
 PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='product-title'] > div")
 PRODUCTS_LIST = (By.CSS_SELECTOR, "[data-test='@web/site-top-of-funnel/ProductCardWrapper']")
-RESULTS_CATEGORY_NAME = (By.CSS_SELECTOR, "[data-test='lp-resultsCount'] > span")
-RIGHTSIDE_NAV_PANEL = (By.XPATH, "//div[@class='ModalDrawer']/div[1]/div[1]")
+SIDE_NAV_PANEL = (By.XPATH, "//div[@class='ModalDrawer']/div[1]/div[1]")
 VIEWCART_AND_CHECKOUT_BUTTON = (By.XPATH, "//div[@data-test='content-wrapper']/div[3]/a")
 
 
@@ -40,21 +39,21 @@ def click_on_viewCartAndCheckOut_button_in_navPanel(context):
     ).click()
 
 
-@then('Product results for {search_word} are shown')
-def verify_found_results(context, search_word):
-    results_category_name = context.driver.wait.until(
-        EC.visibility_of_element_located(RESULTS_CATEGORY_NAME),
-        message='Results category name not shown'
-    )
-    assert search_word.lower() in results_category_name.text.lower(), 'Results category name not found'
-    assert search_word.lower() in context.driver.current_url.lower(), f'Expected query not in {context.driver.current_url.lower()}'
+@then('Verify search results shown for {search_word}')
+def verify_search_results(context, search_word):
+    context.app.search_results_page.verify_search_results(search_word)
 
 
-@then('Right-side navigation panel with "Add to cart" button is shown')
+@then('Verify {search_word} in URL')
+def verify_search_url(context, search_word):
+    context.app.search_results_page.verify_search_url(search_word)
+
+
+@then('Side navigation panel with "Add to cart" button is shown')
 def verify_navPanel_with_addToCart_button(context):
     context.driver.wait.until(
-        EC.visibility_of_element_located(RIGHTSIDE_NAV_PANEL),
-        message='Right-side navigation panel not shown'
+        EC.visibility_of_element_located(SIDE_NAV_PANEL),
+        message='Side navigation panel not shown'
     )
     context.driver.wait.until(
         EC.visibility_of_element_located(ADD_TO_CART_BUTTON_IN_NAV),
