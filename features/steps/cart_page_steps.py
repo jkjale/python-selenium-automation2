@@ -18,7 +18,3 @@ def verify_cart_page(context):
     first_item_price = first_item.find_element(*CART_ITEM_PRICE).text
     subtotal = context.driver.find_element(*SUBTOTAL).text
     assert first_item_price.strip() == subtotal.strip(), 'Subtotal is incorrect'
-
-@then('Verify "Your cart is empty" message is shown')
-def verify_empty_cart_msg(context):
-    context.app.cart_page.verify_empty_cart_msg()
