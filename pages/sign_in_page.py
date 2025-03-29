@@ -9,6 +9,7 @@ class SignInPage(Page):
     PASSWORD_FIELD = (By.ID, "password")
     SIGN_IN_BTN = (By.ID, "login")
     SIGN_IN_PAGE_HEADER = (By.XPATH, "//span[text()='Sign into your Target account']")
+    TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[text()='Target terms and conditions']")
     USERNAME_FIELD = (By.ID, "username")
 
     def click_sign_in_btn(self):
@@ -35,3 +36,6 @@ class SignInPage(Page):
     def input_username_and_password(self):
         self.input_text(self.email, *self.USERNAME_FIELD)
         self.input_text(self.password, *self.PASSWORD_FIELD)
+
+    def click_target_terms_and_conditions_link(self):
+        self.wait_until_clickable_click(self.TERMS_AND_CONDITIONS_LINK)
