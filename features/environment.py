@@ -34,20 +34,19 @@ def browser_init(context, scenario_name):
 
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
+    # To change devices go to https://www.browserstack.com/docs/automate/capabilities and go to "Legacy" and choose device
     # bs_user = '***'
     # bs_key = '***'
     # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    #
     # options = Options()
     # bstack_options = {
     #     "os": "Windows",
     #     "osVersion": "11",
-    #     'browserName': 'edge',
+    #     'browserName': 'chrome',
     #     'sessionName': scenario_name,
     # }
     # options.set_capability('bstack:options', bstack_options)
     # context.driver = webdriver.Remote(command_executor=url, options=options)
-
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
@@ -56,17 +55,18 @@ def browser_init(context, scenario_name):
 
 
 def before_scenario(context, scenario):
-    print('\nStarted scenario: ', scenario.name)
+    print('Scenariooooo:', scenario)
+    print('\nStarted scenario:', scenario.name)
     browser_init(context, scenario.name)
 
 
 def before_step(context, step):
-    print('\nStarted step: ', step)
+    print('\nStarted step:', step)
 
 
 def after_step(context, step):
     if step.status == 'failed':
-        print('\nStep failed: ', step)
+        print('\nStep failed:', step)
 
 
 def after_scenario(context, feature):
