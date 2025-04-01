@@ -10,10 +10,12 @@ def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
+    ### CHROME ###
     driver_path = ChromeDriverManager().install()
     service = Service(driver_path)
     context.driver = webdriver.Chrome(service=service)
 
+    ### FIREFOX ###
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
     # context.driver = webdriver.Firefox(service=service)
